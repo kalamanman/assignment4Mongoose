@@ -6,21 +6,18 @@ const errorHndler= require('error-handler')
 const url='mongodb://localhost:27017/test'
 const routes= require('./routes')
 mongoose.Promise = global.Promise
-mongoose.connct('url')
+mongoose.connect('url')
 let scheema = mongoose.Scheema({
-  Account:Number,
+ name:String,
   Balance:Number,
-  name:String
+
 })
 const app = express()
 app.use('logger')
 app.use(bodyParser.json())
 app.use(errorHndler)
 
-app.get('/',routes.getroutes)
-app.post('/accounts/:account',routes.addAccount)
-app.put("/accounts/:account",routes.updateAccount)
-app.delete('/acounts/:acount',routes.removeAcount)
-app.get('/accounts/:account/balance',routes.getBalance)
-app.post('/accounts/:account/:balance',routes.depositBalance)
-app.put('/accounts/:account/:balance',routes.withdrawBalance)
+app.get('/accounts',routes.getAccounts)
+app.post('/accounts',routes.addAccount)
+app.put("/accounts/:accountId",routes.updateAccount)
+app.delete('/acounts/:acountId',routes.removeAcount)
